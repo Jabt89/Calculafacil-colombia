@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CalculaFácil Colombia — Calculadora de CDT</title>
+<meta name="description" content="Calcula cuánto podrías recibir por un CDT en Colombia. Herramienta gratuita y sencilla.">
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;background:#f5f7fb;color:#172033}
+header{background:#fff;border-bottom:1px solid #e7ebf2;position:sticky;top:0;z-index:10}.nav{max-width:1050px;margin:auto;padding:16px 20px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:21px;font-weight:800}.logo span{color:#2864e8}.nav a{text-decoration:none;color:#536078;font-size:14px;margin-left:18px}
+.hero{background:#fff;padding:52px 20px 38px}.hero-inner{max-width:1050px;margin:auto}.tag{display:inline-block;padding:7px 11px;border-radius:99px;background:#eaf1ff;color:#2864e8;font-weight:700;font-size:12px}
+h1{font-size:clamp(34px,6vw,58px);line-height:1.03;margin:16px 0 12px;max-width:750px;letter-spacing:-1.8px}.hero p{font-size:18px;color:#667085;max-width:650px;line-height:1.55}
+main{max-width:1050px;margin:-5px auto 50px;padding:0 20px}.card{background:#fff;border:1px solid #e5e9f0;border-radius:20px;padding:28px;box-shadow:0 12px 35px rgba(30,45,80,.07)}
+.grid{display:grid;grid-template-columns:1.05fr .95fr;gap:22px}.card h2{margin:0 0 6px;font-size:23px}.muted{color:#718096;font-size:14px}
+label{display:block;font-weight:700;font-size:14px;margin:20px 0 8px}input{width:100%;padding:14px 15px;border:1px solid #d8deea;border-radius:11px;font-size:16px;outline:none}input:focus{border-color:#2864e8;box-shadow:0 0 0 3px #eaf1ff}
+button{width:100%;border:0;border-radius:11px;padding:15px;background:#2864e8;color:#fff;font-size:16px;font-weight:800;margin-top:22px;cursor:pointer}button:hover{filter:brightness(.96)}
+.result{background:#f6f8fc;border-radius:16px;padding:22px;margin-top:16px}.big{font-size:36px;font-weight:850;margin:7px 0}.row{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid #e2e7ef;font-size:14px}.row:last-child{border-bottom:0}.green{font-weight:800}
+.ad{margin-top:22px;border:1px dashed #b9c2d0;border-radius:14px;padding:22px;text-align:center;color:#8a94a6;font-size:13px}
+.tools{margin-top:26px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.tool{background:#fff;border:1px solid #e5e9f0;border-radius:15px;padding:20px}.tool h3{margin:8px 0 5px}.tool p{margin:0;color:#718096;font-size:13px;line-height:1.45}
+.note{margin-top:25px;color:#778196;font-size:12px;line-height:1.5}footer{background:#fff;border-top:1px solid #e7ebf2;padding:30px 20px;color:#7b8495;text-align:center;font-size:13px}
+@media(max-width:750px){.grid{grid-template-columns:1fr}.tools{grid-template-columns:1fr}.nav a{display:none}.hero{padding-top:38px}.card{padding:22px}}
+</style>
+</head>
+<body>
+<header><div class="nav"><div class="logo">Calcula<span>Fácil</span> Colombia</div><nav><a href="#cdt">CDT</a><a href="#herramientas">Herramientas</a></nav></div></header>
+
+<section class="hero"><div class="hero-inner">
+<span class="tag">100% GRATIS</span>
+<h1>Calcula tu dinero antes de tomar decisiones.</h1>
+<p>Estima cuánto podrías ganar con un CDT y próximamente usa otras herramientas financieras pensadas para Colombia.</p>
+</div></section>
+
+<main id="cdt">
+<div class="grid">
+<section class="card">
+<h2>Calculadora de CDT</h2>
+<p class="muted">Ingresa los datos de tu inversión.</p>
+<label for="monto">Monto a invertir (COP)</label>
+<input id="monto" type="number" min="0" step="100000" value="200000000">
+<label for="tasa">Tasa efectiva anual — E.A. (%)</label>
+<input id="tasa" type="number" min="0" step="0.01" value="10">
+<label for="dias">Plazo (días)</label>
+<input id="dias" type="number" min="1" step="1" value="360">
+<button onclick="calcular()">Calcular rendimiento</button>
+<div class="note">Estimación matemática. La tasa, retenciones, condiciones del banco y forma de pago pueden cambiar el resultado final.</div>
+</section>
+
+<section class="card">
+<h2>Tu resultado</h2>
+<p class="muted">Estimación antes de posibles retenciones.</p>
+<div class="result">
+<div class="muted">Interés estimado</div><div class="big" id="interes">$0</div>
+<div class="row"><span>Capital inicial</span><strong id="capital">$0</strong></div>
+<div class="row"><span>Total estimado al vencimiento</span><strong id="total">$0</strong></div>
+<div class="row"><span>Rendimiento equivalente mensual*</span><strong id="mensual">$0</strong></div>
+</div>
+<div class="ad">Espacio reservado para publicidad (AdSense)</div>
+</section>
+</div>
+
+<section id="herramientas" class="tools">
+<div class="tool">🧮<h3>Interés compuesto</h3><p>Calcula cómo puede crecer un ahorro con el tiempo.</p></div>
+<div class="tool">🏦<h3>Préstamos</h3><p>Estima cuotas y costo total de un crédito.</p></div>
+<div class="tool">💵<h3>Conversor COP / USD</h3><p>Convierte pesos colombianos a dólares y viceversa.</p></div>
+</section>
+
+<p class="note">*El valor mensual es una referencia del interés total dividido entre los meses del plazo; un CDT normalmente no paga intereses mensualmente. No constituye asesoría financiera.</p>
+</main>
+
+<footer>© 2026 CalculaFácil Colombia · Herramientas financieras gratuitas</footer>
+
+<script>
+const money = n => new Intl.NumberFormat('es-CO',{style:'currency',currency:'COP',maximumFractionDigits:0}).format(Math.round(n));
+function calcular(){
+ const P=Number(document.getElementById('monto').value)||0;
+ const r=Number(document.getElementById('tasa').value)||0;
+ const d=Number(document.getElementById('dias').value)||0;
+ const interest=P*(Math.pow(1+r/100,d/365)-1);
+ const total=P+interest;
+ const months=d/30.4375;
+ document.getElementById('interes').textContent=money(interest);
+ document.getElementById('capital').textContent=money(P);
+ document.getElementById('total').textContent=money(total);
+ document.getElementById('mensual').textContent=money(months>0?interest/months:0);
+}
+calcular();
+</script>
+</body>
+</html>
